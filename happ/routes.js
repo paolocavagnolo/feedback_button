@@ -18,6 +18,24 @@ module.exports = [{
     }, {
 
     method: 'GET',
+    path: '/risposta/',
+    handler: Pages.thanks
+
+    }, {
+
+    method: 'GET',
+    path: '/errore/',
+    handler: Pages.err
+
+    }, {
+
+    method: 'POST',
+    path: '/risposta/', 
+    handler: Pages.report
+
+    }, {
+
+    method: 'GET',
     path: '/{param*}',
     handler: Assets.servePublicDirectory
 

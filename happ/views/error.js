@@ -4,11 +4,9 @@
    <meta charset="UTF-8">
    <title>Domande</title>
    <link href="/css/style.css" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 </head>
 <body>
-	{{#domanda}}
-   	<p>{{testo}} ?</p>
-   	{{/domanda}}
+   	<p>Il DataBase si è rotto..</p>
 </body>
 </html>

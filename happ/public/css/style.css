@@ -3,7 +3,8 @@
 
 body {
 	
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Palanquin Dark', sans-serif;
+
 	font-size: 80px;
 	
 	background: white;
@@ -11,7 +12,7 @@ body {
 	margin-top: 300px;
 	text-align: center;
 	line-height: 1.5em;
-	color: black;
+	color: red;
 
 }
 
