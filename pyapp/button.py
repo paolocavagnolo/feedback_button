@@ -12,7 +12,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
 profile=webdriver.FirefoxProfile()
-profile.add_extension("/Users/paolo/Desktop/r_kiosk-0.9.0-fx.xpi")
+profile.add_extension("./r_kiosk-0.9.0-fx.xpi")
 profile.set_preference("extensions.r_kiosk.currentVersion", "0.9.0")
 	# firefoxOptions = Options()
 	# firefoxOptions.add_argument("--kiosk")
