@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import datetime
 import requests
@@ -10,6 +10,16 @@ import termios
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+
+btn_A = 26
+btn_B = 13
+btn_C = 5
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(btn_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(btn_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(btn_C, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 profile=webdriver.FirefoxProfile()
 profile.add_extension("./r_kiosk-0.9.0-fx.xpi")
