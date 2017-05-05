@@ -21,3 +21,10 @@
 2017-04-24 10:07:45.734147,La scuola è bella,a
 2017-04-24 10:07:53.956794,La scuola è bella,b
 2017-04-24 10:08:01.182658,La scuola è bella,c
+2017-04-24 16:07:36.776561,Jdlx,1
+2017-04-24 16:08:04.150271,Jdlx,1
+2017-04-24 16:12:24.121686,Fhbf,1
+2017-04-24 16:12:34.049931,Fhbf,2
+2017-04-24 16:14:58.693602,Ghf,1
+2017-04-24 16:15:43.387624,Jsis sia sis did djjdudks djdmd xuucuensvoodiisjdbdjdo did d I'd skdjdnd d,2
+2017-04-24 16:16:08.323766,Jsis sia sis did djjdudks djdmd xuucuensvoodiisjdbdjdo did d I'd skdjdnd d,1
