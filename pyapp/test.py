@@ -1,10 +1,12 @@
 import RPi.GPIO as GPIO
-import asyncio
-import socket
+import keyboard
+import time
 
 btn_A = 26
 btn_B = 13
 btn_C = 5
+
+GPIO.cleanup()
 
 GPIO.setmode(GPIO.BCM)
 
@@ -12,25 +14,24 @@ GPIO.setup(btn_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(btn_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(btn_C, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-rsock, wsock = socket.socketpair()
+a = False;
+b = False;
+c = False;
 
-def wrapper():
-	
-	if GPIO.input(btn_A) == False:
-    	print('Button A Pressed')
+def funA(btn_A):
+	print("a\n")
 
-    elif GPIO.input(btn_B) == False:
-    	print('Button B Pressed')
+def funB(btn_B):
+	print("b\n")
 
-    elif GPIO.input(btn_C) == False:
-    	print('Button C Pressed')
+def funC(btn_C):
+	print("c\n")
 
-	rsock.recv(100)
-	callback()
+GPIO.add_event_detect(btn_A, GPIO.RISING, callback=funA, bouncetime=5000)
+GPIO.add_event_detect(btn_B, GPIO.RISING, callback=funB, bouncetime=5000)
+GPIO.add_event_detect(btn_C, GPIO.RISING, callback=funC, bouncetime=5000)
 
-loop = asyncio.get_event_loop()
-loop.add_reader(rsock, wrapper)
-loop.run_forever()
+while True:
+	time.sleep(10)
 
 
-    

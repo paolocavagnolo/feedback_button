@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import datetime
 import requests
@@ -6,7 +6,6 @@ import telepot
 import sys
 import asyncio
 import telepot.aio
-import termios
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -15,11 +14,11 @@ btn_A = 26
 btn_B = 13
 btn_C = 5
 
-GPIO.setmode(GPIO.BCM)
+# GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(btn_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_C, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# GPIO.setup(btn_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# GPIO.setup(btn_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# GPIO.setup(btn_C, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 profile=webdriver.FirefoxProfile()
 profile.add_extension("./r_kiosk-0.9.0-fx.xpi")
@@ -40,11 +39,11 @@ with open("../data/data.txt", "r") as myfile:
 	print(content)
 	domanda = content[-1].split(',')[1]
 
-def got_input():
+def got_input(lettera):
 	global loop
 	st = datetime.datetime.utcnow()
 
-	ipt = sys.stdin.readline()
+	ipt = lettera
 	print(ipt)
 
 	with open("../data/data.txt", "a") as myfile:
@@ -54,16 +53,14 @@ def got_input():
 
 	if r.json()['status'] == 'ok':
 		browser.get(url_btn)
-		loop.remove_reader(sys.stdin)
+		
 		time.sleep(5)
-		termios.tcflush(sys.stdin, termios.TCIOFLUSH)
 		browser.get(url_qst + '?testo=' + domanda)
+
 	else:
 		browser.get(url_err)
 
-	termios.tcflush(sys.stdin, termios.TCIOFLUSH)
-	loop.add_reader(sys.stdin, got_input)
-
+	
 def handle(msg):
 	global domanda
 
@@ -82,7 +79,24 @@ TOKEN = '349391683:AAFE2_8jNCpJwi4pzAbwNee6t2yIXaFZkNc'
 
 bot = telepot.aio.Bot(TOKEN)
 
-loop.add_reader(sys.stdin, got_input)
+
+def funA(btn_A):
+
+	got_input('a')
+
+def funB(btn_B):
+
+	got_input('b')
+
+def funC(btn_C):
+
+	got_input('c')
+
+
+# GPIO.add_event_detect(btn_A, GPIO.RISING, callback=funA, bouncetime=5000)
+# GPIO.add_event_detect(btn_B, GPIO.RISING, callback=funB, bouncetime=5000)
+# GPIO.add_event_detect(btn_C, GPIO.RISING, callback=funC, bouncetime=5000)
+
 loop.create_task(bot.message_loop(handle))
 print('Listening ...')
 browser.maximize_window()
@@ -90,59 +104,3 @@ browser.get(url_qst + '?testo=' + domanda)
 #elem = browser.find_element_by_tag_name('html')
 #elem.send_keys(Keys.F11)
 loop.run_forever()
-
-# url_btn = 'http://localhost:4000'
-# url_btn = 'http://localhost:4000'
-
-# btn_A = 14
-# btn_B = 15
-# btn_C = 18
-# btn_D = 23
-
-# GPIO.setmode(GPIO.BCM)
-
-# GPIO.setup(14, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-# def send_signal( btn ):
-# 	st = datetime.datetime.utcnow()
-# 	with open("data.txt", "a") as myfile:
-#     	myfile.write(str(st) + ',' + str(btn))
-
-#     payload = {'datetime': str(st), 'btn': str(btn)}
-#     r = requests.post(url, data=payload)
-
-#     if r.status_code == 400:
-#     	print('server down!')
-
-#     time.sleep(5)
-
-#     r = requests.post(url, data=payload)
-
-#     if r.status_code == 400:
-#     	print('server down!')
-
-
-
-# while True:
-
-#     if GPIO.input(btn_A) == False:
-#     	print('Button A Pressed')
-#     	send_signal(0)
-
-#     elif GPIO.input(btn_B) == False:
-#     	print('Button B Pressed')
-#     	send_signal(1)
-
-#     elif GPIO.input(btn_C) == False:
-#     	print('Button C Pressed')
-#     	send_signal(2)
-
-#     elif GPIO.input(btn_D) == False:
-#     	print('Button D Pressed')
-#     	send_signal(3)
-
-
-
